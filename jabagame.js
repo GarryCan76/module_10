@@ -1,5 +1,6 @@
 let keysDown;
 let mousePos = {x:0, y:0};
+let mouseDown = [0, 0, 0]
 export class Init{
     constructor(canvas) {
         keysDown = {};
@@ -21,9 +22,17 @@ export class Init{
                 y: evt.clientY - rect.top
             };
         }
+        mouseDown = [0, 0, 0]
+        document.body.onmousedown = function(evt) {
+            mouseDown[evt.button] = 1;
+        }
+        document.body.onmouseup = function(evt) {
+            mouseDown[evt.button] = 0;
+        }
     }
     keysDown(){return keysDown}
     mousePos(){return mousePos}
+    mouseButtonDown(){return mouseDown}
 }
 
 
